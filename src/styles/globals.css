@@ -1,4 +1,3 @@
-git add styles/globals.css
-git commit -m "Fix CSS import order"
-git push origin main
-}
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap')
+
+@custom-variant dark (&:is(.dark *));
