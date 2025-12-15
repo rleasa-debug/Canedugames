@@ -1,13 +1,3 @@
-🚨 WAIT! STOP! 🚨
-
-I can see the file now, but you only have 3 lines! The file says "3 lines · 119 Bytes" but it should be 192 lines with all the CSS styling!
-
-You accidentally deleted everything else! You need the ENTIRE file with all the colors, fonts, and styles.
-
-Here's What to Do:
-Click the pencil icon (✏️) again to edit
-Delete everything in the file
-Copy and paste this ENTIRE file below:
 @import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
 
 @custom-variant dark (&:is(.dark *));
