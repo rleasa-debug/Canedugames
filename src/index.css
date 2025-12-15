@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Lilita+One&display=swap");
 /*! tailwindcss v4.1.3 | MIT License | https://tailwindcss.com */
 @layer properties {
   @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
@@ -3908,71 +3907,85 @@
     }
   }
 
-  .dark\:border-input:is(.dark *) {
-    border-color: var(--input);
-  }
-
-  .dark\:bg-destructive\/60:is(.dark *) {
-    background-color: var(--destructive);
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .dark\:bg-destructive\/60:is(.dark *) {
-      background-color: color-mix(in oklab, var(--destructive) 60%, transparent);
+  @media (prefers-color-scheme: dark) {
+    .dark\:border-input {
+      border-color: var(--input);
     }
   }
 
-  .dark\:bg-input\/30:is(.dark *) {
-    background-color: var(--input);
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .dark\:bg-input\/30:is(.dark *) {
-      background-color: color-mix(in oklab, var(--input) 30%, transparent);
-    }
-  }
-
-  @media (hover: hover) {
-    .dark\:hover\:bg-accent\/50:is(.dark *):hover {
-      background-color: var(--accent);
+  @media (prefers-color-scheme: dark) {
+    .dark\:bg-destructive\/60 {
+      background-color: var(--destructive);
     }
 
     @supports (color: color-mix(in lab, red, red)) {
-      .dark\:hover\:bg-accent\/50:is(.dark *):hover {
-        background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+      .dark\:bg-destructive\/60 {
+        background-color: color-mix(in oklab, var(--destructive) 60%, transparent);
       }
     }
   }
 
-  @media (hover: hover) {
-    .dark\:hover\:bg-input\/50:is(.dark *):hover {
+  @media (prefers-color-scheme: dark) {
+    .dark\:bg-input\/30 {
       background-color: var(--input);
     }
 
     @supports (color: color-mix(in lab, red, red)) {
-      .dark\:hover\:bg-input\/50:is(.dark *):hover {
-        background-color: color-mix(in oklab, var(--input) 50%, transparent);
+      .dark\:bg-input\/30 {
+        background-color: color-mix(in oklab, var(--input) 30%, transparent);
       }
     }
   }
 
-  .dark\:focus-visible\:ring-destructive\/40:is(.dark *):focus-visible {
-    --tw-ring-color: var(--destructive);
-  }
+  @media (prefers-color-scheme: dark) {
+    @media (hover: hover) {
+      .dark\:hover\:bg-accent\/50:hover {
+        background-color: var(--accent);
+      }
 
-  @supports (color: color-mix(in lab, red, red)) {
-    .dark\:focus-visible\:ring-destructive\/40:is(.dark *):focus-visible {
-      --tw-ring-color: color-mix(in oklab, var(--destructive) 40%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        .dark\:hover\:bg-accent\/50:hover {
+          background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+        }
+      }
     }
   }
 
-  .dark\:aria-invalid\:ring-destructive\/40:is(.dark *)[aria-invalid="true"] {
-    --tw-ring-color: var(--destructive);
+  @media (prefers-color-scheme: dark) {
+    @media (hover: hover) {
+      .dark\:hover\:bg-input\/50:hover {
+        background-color: var(--input);
+      }
+
+      @supports (color: color-mix(in lab, red, red)) {
+        .dark\:hover\:bg-input\/50:hover {
+          background-color: color-mix(in oklab, var(--input) 50%, transparent);
+        }
+      }
+    }
   }
 
-  @supports (color: color-mix(in lab, red, red)) {
-    .dark\:aria-invalid\:ring-destructive\/40:is(.dark *)[aria-invalid="true"] {
-      --tw-ring-color: color-mix(in oklab, var(--destructive) 40%, transparent);
+  @media (prefers-color-scheme: dark) {
+    .dark\:focus-visible\:ring-destructive\/40:focus-visible {
+      --tw-ring-color: var(--destructive);
+    }
+
+    @supports (color: color-mix(in lab, red, red)) {
+      .dark\:focus-visible\:ring-destructive\/40:focus-visible {
+        --tw-ring-color: color-mix(in oklab, var(--destructive) 40%, transparent);
+      }
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .dark\:aria-invalid\:ring-destructive\/40[aria-invalid="true"] {
+      --tw-ring-color: var(--destructive);
+    }
+
+    @supports (color: color-mix(in lab, red, red)) {
+      .dark\:aria-invalid\:ring-destructive\/40[aria-invalid="true"] {
+        --tw-ring-color: color-mix(in oklab, var(--destructive) 40%, transparent);
+      }
     }
   }
 
@@ -4001,7 +4014,6 @@
     padding-bottom: calc(var(--spacing) * 6);
   }
 }
-
 
 :root {
   --font-size: 16px;
