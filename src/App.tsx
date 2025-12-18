@@ -41,7 +41,7 @@ import { CurriculumInfo } from "./components/CurriculumInfo";
 import { Brain, Sparkles, GraduationCap, BookOpen, Calculator, Globe, Music, Shapes, Clock, BookText, Volume2, LogOut, Crown, UserCog, Trophy, MapPin, Anchor, BarChart3 } from "lucide-react";
 import { supabase } from './utils/supabase/client';
 import { projectId, publicAnonKey } from './utils/supabase/info';
-import { Logo } from './components/Logo';
+import logo from "figma:asset/9f7277dc3b6010e16e010377e1ae5232b1fea571.png";
 
 type GameType = "home" | "typing" | "sentence" | "spelling" | "math" | "geography" | "reading" | "phonics" | "pattern" | "timestables" | "story" | "rhyming" | "prefixsuffix" | "shapecomparison" | "mapleleaf" | "wordfamilykeys" | "ispywords" | "vowelsounds" | "anglebisector" | "factorbattleship" | "chartinterpretation" | "maze" | "mathmatching" | "privacy" | "terms" | "curriculum";
 
@@ -199,7 +199,7 @@ function AppContent() {
               <div className="flex justify-between items-center">
                 {/* Logo and Title */}
                 <div className="flex items-center gap-2 md:gap-4">
-                  <Logo className="w-16 h-16 md:w-24 md:h-24 object-contain" />
+                  <ImageWithFallback src={logo} alt="CAN|EDU Games Logo" className="w-16 h-16 md:w-24 md:h-24 object-contain" />
                   <div>
                     <h1 className="text-xl md:text-3xl">
                       <TextWithVoice>CAN|EDU Games - Admin</TextWithVoice>
@@ -286,7 +286,7 @@ function AppContent() {
                   className="cursor-pointer"
                 >
                   <div className="relative">
-                    <Logo className="w-16 h-16 md:w-24 md:h-24 object-contain relative z-10" />
+                    <ImageWithFallback src={logo} alt="CAN|EDU Games Logo" className="w-16 h-16 md:w-24 md:h-24 object-contain relative z-10" />
                     {/* Glowing halo effect */}
                     <motion.div
                       animate={{
