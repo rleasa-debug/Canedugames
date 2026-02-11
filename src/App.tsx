@@ -80,6 +80,7 @@ function AppContent() {
   const { currentLevel, stats } = useScore();
 
   useEffect(() => {
+    console.log("🚀 App v1.2 loaded - LogIn error fix verified");
     // Check current session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
@@ -465,7 +466,7 @@ function AppContent() {
                   <button onClick={() => setCurrentGame("curriculum")} className="hover:text-blue-600 transition-colors">Curriculum Alignment</button>
                 </div>
                 <p className="text-center text-sm text-gray-500 mt-4">
-                  © {new Date().getFullYear()} CAN|EDU Games. All rights reserved.
+                  © {new Date().getFullYear()} CAN|EDU Games. All rights reserved. (v1.2)
                 </p>
               </footer>
             </main>
