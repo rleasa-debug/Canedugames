@@ -5,7 +5,6 @@ import { projectId, publicAnonKey } from '../utils/supabase/info';
 import { Button } from './ui/button';
 import { LogIn, UserPlus, Loader2, GraduationCap } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import logo from "figma:asset/9f7277dc3b6010e16e010377e1ae5232b1fea571.png";
 
 interface AuthProps {
   onAuthSuccess: (accessToken: string, userName: string) => void;
@@ -157,7 +156,7 @@ export function Auth({ onAuthSuccess }: AuthProps) {
             className="inline-flex items-center justify-center mb-4"
           >
             <ImageWithFallback
-              src={logo}
+              src="/logo.png"
               alt="CAN|EDU Games Logo"
               className="w-32 h-32 object-contain"
             />
