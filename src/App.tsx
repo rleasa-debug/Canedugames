@@ -79,8 +79,6 @@ function AppContent() {
   const { currentLevel, stats } = useScore();
 
   useEffect(() => {
-    console.log("🚀 App v1.4 loaded");
-    toast.success("System Updated to v1.4", { duration: 5000 });
     // Check current session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
@@ -235,7 +233,6 @@ function AppContent() {
                     <div>
                       <h1 className="text-xl md:text-3xl flex items-center gap-2">
                         <TextWithVoice>CAN|EDU Games</TextWithVoice>
-                        <span className="text-xs text-green-600 font-bold bg-green-100 px-2 py-1 rounded-full border border-green-200 shadow-sm" title="Current Version">v1.4</span>
                       </h1>
                       <p className="text-xs text-gray-600 hidden md:block">Canadian Curriculum Education</p>
                     </div>
