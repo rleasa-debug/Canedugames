@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Brain, Sparkles, GraduationCap, BookOpen, Calculator, Globe, Music, Shapes, Clock, BookText, Volume2, LogOut, Crown, UserCog, Trophy, MapPin, Anchor, BarChart3, Menu, X } from "lucide-react";
+import { Toaster, toast } from 'sonner';
 import { projectId } from './utils/supabase/info';
 import { supabase } from './utils/supabase/client';
 import { motion, AnimatePresence } from 'motion/react';
@@ -7,32 +8,31 @@ import { ImageWithFallback } from './components/figma/ImageWithFallback';
 import { TextWithVoice } from './components/TextWithVoice';
 import { ScoreProvider, useScore } from './contexts/ScoreContext';
 import { TypingGame } from './components/TypingGame';
-import { SentenceGame } from './components/SentenceGame';
+import { SentenceStars as SentenceGame } from './components/SentenceStars';
 import { SpellingGame } from './components/SpellingGame';
 import { MathGame } from './components/MathGame';
-import { GeographyGame } from './components/GeographyGame';
+import { GeographyQuiz as GeographyGame } from './components/GeographyQuiz';
 import { ReadingGame } from './components/ReadingGame';
 import { PhonicsGame } from './components/PhonicsGame';
-import { PatternGame } from './components/PatternGame';
-import { TimesTablesGame } from './components/TimesTablesGame';
-import { StoryGame } from './components/StoryGame';
+import { PatternRecognition as PatternGame } from './components/PatternRecognition';
+import { TimesTablesPractice as TimesTablesGame } from './components/TimesTablesPractice';
+import { StorySequencing as StoryGame } from './components/StorySequencing';
 import { RhymingGame } from './components/RhymingGame';
 import { PrefixSuffixGame } from './components/PrefixSuffixGame';
 import { ShapeComparisonGame } from './components/ShapeComparisonGame';
-import { MapleLeafGame } from './components/MapleLeafGame';
-import { WordFamilyKeysGame } from './components/WordFamilyKeysGame';
-import { ISpyWordsGame } from './components/ISpyWordsGame';
-import { VowelSoundsGame } from './components/VowelSoundsGame';
+import { MappingMapleLeaf as MapleLeafGame } from './components/MappingMapleLeaf';
+import { ISpyWords as ISpyWordsGame } from './components/ISpyWords';
+import { VowelSoundsSorting as VowelSoundsGame } from './components/VowelSoundsSorting';
 import { AngleBisectorGame } from './components/AngleBisectorGame';
-import { FactorBattleshipGame } from './components/FactorBattleshipGame';
-import { ChartInterpretationGame } from './components/ChartInterpretationGame';
+import { FactorBattleship as FactorBattleshipGame } from './components/FactorBattleship';
+import { ChartInterpretation as ChartInterpretationGame } from './components/ChartInterpretation';
 import { MazeGame } from './components/MazeGame';
 import { MathMatchingGame } from './components/MathMatchingGame';
 import AuthModal from './components/AuthModal';
 import ProfileModal from './components/ProfileModal';
 import SubscriptionModal from './components/SubscriptionModal';
 
-type GameType = "home" | "typing" | "sentence" | "spelling" | "math" | "geography" | "reading" | "phonics" | "pattern" | "timestables" | "story" | "rhyming" | "prefixsuffix" | "shapecomparison" | "mapleleaf" | "wordfamilykeys" | "ispywords" | "vowelsounds" | "anglebisector" | "factorbattleship" | "chartinterpretation" | "maze" | "mathmatching" | "privacy" | "terms" | "curriculum";
+type GameType = "home" | "typing" | "sentence" | "spelling" | "math" | "geography" | "reading" | "phonics" | "pattern" | "timestables" | "story" | "rhyming" | "prefixsuffix" | "shapecomparison" | "mapleleaf" | "ispywords" | "vowelsounds" | "anglebisector" | "factorbattleship" | "chartinterpretation" | "maze" | "mathmatching" | "privacy" | "terms" | "curriculum";
 
 interface Game {
   id: GameType;
@@ -59,7 +59,6 @@ const games: Game[] = [
   { id: "prefixsuffix", title: "Prefix & Suffix Summit", description: "Scale word-building mountains", icon: GraduationCap, category: 'literacy', requiredLevel: 4, imageUrl: "https://images.unsplash.com/photo-1671505392704-534b7e31245b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxDYW5hZGlhbiUyMG1vdW50YWlucyUyMGZvcmVzdHxlbnwxfHx8fDE3Njc3MTIyMjV8MA&ixlib=rb-4.1.0&q=80&w=1080" },
   { id: "shapecomparison", title: "Shape Comparison Coast", description: "Compare geometric shapes by the shore", icon: Shapes, category: 'numeracy', requiredLevel: 3, imageUrl: "https://images.unsplash.com/photo-1767417243390-dcbe2d0ceed4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxDYW5hZGlhbiUyMGNvYXN0bGluZSUyMG9jZWFufGVufDF8fHx8MTc2NzcxMjIyNXww&ixlib=rb-4.1.0&q=80&w=1080" },
   { id: "mapleleaf", title: "Maple Leaf Math", description: "Count and calculate with Canada's symbol", icon: MapPin, category: 'numeracy', requiredLevel: 2, imageUrl: "https://images.unsplash.com/photo-1664755312678-f5ccef00a24e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxDYW5hZGlhbiUyMGF1dHVtbiUyMGZvcmVzdHxlbnwxfHx8fDE3Njc3MTIyMjZ8MA&ixlib=rb-4.1.0&q=80&w=1080" },
-  { id: "wordfamilykeys", title: "Word Family Keystone", description: "Unlock word families across Canada", icon: BookOpen, category: 'literacy', requiredLevel: 3, imageUrl: "https://images.unsplash.com/photo-1671505392704-534b7e31245b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxDYW5hZGlhbiUyMG1vdW50YWlucyUyMGZvcmVzdHxlbnwxfHx8fDE3Njc3MTIyMjV8MA&ixlib=rb-4.1.0&q=80&w=1080" },
   { id: "ispywords", title: "I Spy Words Wilderness", description: "Spot sight words in the wild", icon: Sparkles, category: 'literacy', requiredLevel: 2, imageUrl: "https://images.unsplash.com/photo-1664755312678-f5ccef00a24e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxDYW5hZGlhbiUyMGF1dHVtbiUyMGZvcmVzdHxlbnwxfHx8fDE3Njc3MTIyMjZ8MA&ixlib=rb-4.1.0&q=80&w=1080" },
   { id: "vowelsounds", title: "Vowel Sounds Valley", description: "Master vowel sounds through the valleys", icon: Volume2, category: 'literacy', requiredLevel: 3, imageUrl: "https://images.unsplash.com/photo-1671505392704-534b7e31245b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxDYW5hZGlhbiUyMG1vdW50YWlucyUyMGZvcmVzdHxlbnwxfHx8fDE3Njc3MTIyMjV8MA&ixlib=rb-4.1.0&q=80&w=1080" },
   { id: "anglebisector", title: "Angle Bisector Archipelago", description: "Divide angles across island chains", icon: Shapes, category: 'numeracy', requiredLevel: 5, imageUrl: "https://images.unsplash.com/photo-1767417243390-dcbe2d0ceed4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxDYW5hZGlhbiUyMGNvYXN0bGluZSUyMG9jZWFufGVufDF8fHx8MTc2NzcxMjIyNXww&ixlib=rb-4.1.0&q=80&w=1080" },
@@ -80,7 +79,8 @@ function AppContent() {
   const { currentLevel, stats } = useScore();
 
   useEffect(() => {
-    console.log("🚀 App v1.2 loaded - LogIn error fix verified");
+    console.log("🚀 App v1.4 loaded");
+    toast.success("System Updated to v1.4", { duration: 5000 });
     // Check current session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
@@ -138,7 +138,6 @@ function AppContent() {
       case "prefixsuffix": return <PrefixSuffixGame onBack={() => setCurrentGame("home")} />;
       case "shapecomparison": return <ShapeComparisonGame onBack={() => setCurrentGame("home")} />;
       case "mapleleaf": return <MapleLeafGame onBack={() => setCurrentGame("home")} />;
-      case "wordfamilykeys": return <WordFamilyKeysGame onBack={() => setCurrentGame("home")} />;
       case "ispywords": return <ISpyWordsGame onBack={() => setCurrentGame("home")} />;
       case "vowelsounds": return <VowelSoundsGame onBack={() => setCurrentGame("home")} />;
       case "anglebisector": return <AngleBisectorGame onBack={() => setCurrentGame("home")} />;
@@ -234,8 +233,9 @@ function AppContent() {
                       <ImageWithFallback src="/logo.png" alt="CAN|EDU Games Logo" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
                     </motion.div>
                     <div>
-                      <h1 className="text-xl md:text-3xl">
+                      <h1 className="text-xl md:text-3xl flex items-center gap-2">
                         <TextWithVoice>CAN|EDU Games</TextWithVoice>
+                        <span className="text-xs text-green-600 font-bold bg-green-100 px-2 py-1 rounded-full border border-green-200 shadow-sm" title="Current Version">v1.4</span>
                       </h1>
                       <p className="text-xs text-gray-600 hidden md:block">Canadian Curriculum Education</p>
                     </div>
@@ -466,7 +466,7 @@ function AppContent() {
                   <button onClick={() => setCurrentGame("curriculum")} className="hover:text-blue-600 transition-colors">Curriculum Alignment</button>
                 </div>
                 <p className="text-center text-sm text-gray-500 mt-4">
-                  © {new Date().getFullYear()} CAN|EDU Games. All rights reserved. (v1.2)
+                  © {new Date().getFullYear()} CAN|EDU Games. All rights reserved. (v1.4)
                 </p>
               </footer>
             </main>
@@ -501,6 +501,7 @@ function AppContent() {
 export default function App() {
   return (
     <ScoreProvider>
+      <Toaster position="top-center" richColors />
       <AppContent />
     </ScoreProvider>
   );
